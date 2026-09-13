@@ -1,20 +1,24 @@
 :root {
-  --bg: #f4f7f5;
+  /* 社労士過去問ラボ（緑＋オレンジ系）と混同しないよう、宅建過去問ラボは紺＋ゴールド系の
+     配色にしている（2026年9月13日、ユーザー指示）。あわせて「背景（--bg）」「問題文カード
+     （--card-bg、白）」「解説カード（--explanation-bg、暖色のアイボリー）」の3領域を
+     はっきり異なる色調にし、今どの部分を読んでいるか一目で分かるようにした。 */
+  --bg: #eef2f7;
   --card-bg: #ffffff;
-  --text: #222;
-  --muted: #666;
-  --border: #dde3df;
-  --primary: #1b5e42;
-  --primary-dark: #103a29;
-  --accent: #f0a020;
-  --accent-dark: #cc8410;
-  --correct: #2d6a4f;
-  --correct-bg: #e9f5ee;
+  --text: #1c232b;
+  --muted: #57626f;
+  --border: #d3dce6;
+  --primary: #14497a;
+  --primary-dark: #0c2d4d;
+  --accent: #c9932e;
+  --accent-dark: #a87a22;
+  --correct: #1f7a4d;
+  --correct-bg: #e6f4ec;
   --wrong: #b3261e;
   --wrong-bg: #fdecea;
-  --badge-bg: #eaf3ee;
-  --explanation-bg: #f2f8f4;
-  --explanation-border: #1b5e42;
+  --badge-bg: #e3ebf3;
+  --explanation-bg: #fbf3e6;
+  --explanation-border: #a87a22;
   max-width: 100%;
 }
 
@@ -170,7 +174,7 @@ select {
   font-size: 0.98rem;
   cursor: pointer;
 }
-.choice-btn:hover { background: #eaf3ee; }
+.choice-btn:hover { background: #e6edf5; }
 .choice-btn.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); font-weight: bold; }
 .choice-btn.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); font-weight: bold; }
 .choice-btn:disabled { cursor: default; }
@@ -272,11 +276,11 @@ select {
 .site-footer {
   text-align: center;
   font-size: 0.75rem;
-  color: #cfe3d7;
+  color: #cfe0ee;
   background: var(--primary-dark);
   padding: 20px;
 }
-.site-footer a { color: #cfe3d7; }
+.site-footer a { color: #cfe0ee; }
 .site-footer .footer-links { margin-top: 8px; }
 .site-footer .footer-links a { text-decoration: underline; }
 
@@ -315,7 +319,7 @@ select {
   color: var(--text);
   font-size: 0.92rem;
 }
-.question-list li a:hover { background: #eaf3ee; border-color: var(--primary); }
+.question-list li a:hover { background: #e6edf5; border-color: var(--primary); }
 
 .subject-year-row {
   display: flex;
@@ -416,14 +420,14 @@ select {
   font-size: 0.92rem;
   cursor: pointer;
 }
-.toggle-btn:hover { background: #eaf3ee; }
+.toggle-btn:hover { background: #e6edf5; }
 .toggle-btn.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); font-weight: bold; }
 .toggle-btn.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); font-weight: bold; }
 .toggle-btn:disabled { cursor: default; }
 .statement.is-correct { border-left: 4px solid var(--correct); }
 .statement.is-wrong { border-left: 4px solid var(--wrong); }
 .statement-selectable { cursor: pointer; transition: border-color 0.15s ease, background 0.15s ease; }
-.statement-selectable:hover { border-color: var(--primary); background: #eaf3ee; }
+.statement-selectable:hover { border-color: var(--primary); background: #e6edf5; }
 .statement.user-picked { outline: 2px solid var(--primary); outline-offset: -1px; }
 .statement.locked.statement-selectable { cursor: default; }
 .statement-answer-mark {
