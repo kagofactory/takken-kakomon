@@ -1,5 +1,10 @@
 [
   {
+    "id": "r2025-s0",
+    "label": "令和7年度 権利関係（問1〜6のみ収録・作業中、全14問中6問）",
+    "file": "data/r2025-s0.json"
+  },
+  {
     "id": "sample",
     "label": "デモ用サンプル問題",
     "file": "data/sample.json"
