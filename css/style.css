@@ -190,10 +190,19 @@ select {
   border-radius: 8px;
   font-size: 0.85rem;
 }
-.law-status--valid { background: var(--correct-bg); color: var(--correct); }
+.law-status--unverified { background: var(--badge-bg); color: var(--muted); }
+/* 「法改正で答えが変わる／成立しない」設問は、長年受からない受験者が最も見落としやすい
+   最重要シグナルなので、他の状態表示より明確に目立たせる（アイコン・太枠・大きめの文字）。
+   「valid」（現行法で有効＝多数派）はJS/build_pages.py側でそもそも描画しない方針にした。 */
+.law-status--amended,
+.law-status--repealed {
+  font-size: 0.95rem;
+  font-weight: bold;
+  border: 2px solid currentColor;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
 .law-status--amended { background: #fff4de; color: #855c00; }
 .law-status--repealed { background: var(--wrong-bg); color: var(--wrong); }
-.law-status--unverified { background: var(--badge-bg); color: var(--muted); }
 
 .explanation {
   margin-top: 12px;

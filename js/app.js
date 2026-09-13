@@ -353,21 +353,23 @@
     box.classList.remove("hidden");
   }
 
+  // 「valid」（現行法で有効）は多数派で毎回表示すると埋没するため、あえて何も表示しない。
+  // 表示するのは「例外」（法改正で答えが変わった／成立しない／未確認）だけにして、
+  // 長年受からない受験者が現行法とのズレを一目で見落とさないようにする（ユーザー指示）。
   const LAW_STATUS_LABEL = {
-    valid: "現行法で有効",
-    amended: "法改正により内容が変更",
-    repealed: "法改正により成立しない設問",
+    amended: "⚠ 法改正により内容が変更されています",
+    repealed: "⚠ 法改正により現在は成立しない設問です",
     unverified: "現行法との照合が未確認",
   };
 
   function renderLawStatus(q) {
     const box = el("q-law-status");
-    if (!q.law_status) {
+    if (!q.law_status || q.law_status === "valid" || !LAW_STATUS_LABEL[q.law_status]) {
       box.classList.add("hidden");
       return;
     }
     box.className = `law-status law-status--${q.law_status}`;
-    const label = LAW_STATUS_LABEL[q.law_status] || q.law_status;
+    const label = LAW_STATUS_LABEL[q.law_status];
     box.innerHTML = `<strong>${label}</strong>${q.law_status_note ? `　${q.law_status_note}` : ""}`;
   }
 
@@ -616,6 +618,12 @@
         if (item.law_reference_date) text += `\n（法令基準日: ${item.law_reference_date}）`;
         body.textContent = text;
         row.appendChild(head);
+        if (item.law_status && item.law_status !== "valid" && LAW_STATUS_LABEL[item.law_status]) {
+          const lawBox = document.createElement("div");
+          lawBox.className = `law-status law-status--${item.law_status}`;
+          lawBox.innerHTML = `<strong>${LAW_STATUS_LABEL[item.law_status]}</strong>${item.law_status_note ? `　${item.law_status_note}` : ""}`;
+          row.appendChild(lawBox);
+        }
         row.appendChild(body);
         explanationList.appendChild(row);
       }

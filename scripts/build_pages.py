@@ -44,10 +44,12 @@ SUBJECT_META = [
     ("s3", "税・その他（税法・地価公示法・需給関係・土地建物）"),
 ]
 
+# 「valid」（現行法で有効、多数派）は毎回表示すると埋没するため描画しない。
+# 長年受からない受験者が最も見落としやすい「法改正で答えが変わった／成立しない」設問を
+# 一目で分かるようにする（ユーザー指示、2026年9月13日）ため、例外だけをアイコン付きで強調する。
 LAW_STATUS_LABEL = {
-    "valid": "現行法で有効",
-    "amended": "法改正により内容が変更",
-    "repealed": "法改正により成立しない設問",
+    "amended": "⚠ 法改正により内容が変更されています",
+    "repealed": "⚠ 法改正により現在は成立しない設問です",
     "unverified": "現行法との照合が未確認",
 }
 
@@ -98,9 +100,9 @@ def render_choice(c, answer_num):
 
 def render_law_status(item):
     status = item.get("law_status")
-    if not status:
+    if not status or status == "valid" or status not in LAW_STATUS_LABEL:
         return ""
-    label = LAW_STATUS_LABEL.get(status, status)
+    label = LAW_STATUS_LABEL[status]
     note = item.get("law_status_note", "")
     return f'''
     <div class="law-status law-status--{esc(status)}">
