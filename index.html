@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宅建士試験 過去問演習・解説｜宅建過去問ラボ</title>
+<meta name="description" content="宅地建物取引士（宅建士）試験の過去問を年度・分野別に演習できる無料サイト。条文・判例を明示した解説付き。">
+<link rel="canonical" href="https://takken-kakomon.com/index.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="宅建過去問ラボ">
+<meta property="og:title" content="宅建士試験 過去問演習・解説｜宅建過去問ラボ">
+<meta property="og:description" content="宅地建物取引士（宅建士）試験の過去問を年度・分野別に演習できる無料サイト。条文・判例を明示した解説付き。">
+<meta property="og:url" content="https://takken-kakomon.com/index.html">
+<meta property="og:image" content="https://takken-kakomon.com/images/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="宅建士試験 過去問演習・解説｜宅建過去問ラボ">
+<meta name="twitter:description" content="宅地建物取引士（宅建士）試験の過去問を年度・分野別に演習できる無料サイト。条文・判例を明示した解説付き。">
+<meta name="twitter:image" content="https://takken-kakomon.com/images/og-image.png">
+<link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "宅建過去問ラボ",
+  "url": "https://takken-kakomon.com/",
+  "description": "宅地建物取引士（宅建士）試験の過去問を年度・分野別に演習できる無料サイト。条文・判例を明示した解説付き。"
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <h1><a href="index.html">宅建過去問ラボ</a></h1>
+</header>
+
+<main id="app">
+
+  <!-- ===== 出題設定画面 ===== -->
+  <section id="view-setup" class="view">
+    <div class="card progress-card">
+      <span class="progress-count" id="progress-count">読み込み中…</span>
+    </div>
+
+    <div class="card resume-card hidden" id="resume-card">
+      <h2>続きから始める</h2>
+      <p id="resume-card-text"></p>
+      <div class="quiz-progress-bar"><div id="resume-progress-bar-fill" class="quiz-progress-bar-fill"></div></div>
+      <button id="resume-btn" class="btn-primary">続きから始める</button>
+    </div>
+
+    <div class="card">
+      <h2>分野から選ぶ</h2>
+      <p class="subject-grid-note">クリックするとすぐに最新年度の問題を解き始めます。</p>
+      <div class="subject-grid">
+        <a class="subject-card" href="index.html?exam=data/sample.json&amp;mode=single&amp;autostart=1"><h3>権利関係（民法等）</h3><p>年度分・準備中</p></a>
+        <a class="subject-card" href="index.html?exam=data/sample.json&amp;mode=single&amp;autostart=1"><h3>宅建業法</h3><p>年度分・準備中</p></a>
+        <a class="subject-card" href="index.html?exam=data/sample.json&amp;mode=single&amp;autostart=1"><h3>法令上の制限</h3><p>年度分・準備中</p></a>
+        <a class="subject-card" href="index.html?exam=data/sample.json&amp;mode=single&amp;autostart=1"><h3>税・その他</h3><p>年度分・準備中</p></a>
+      </div>
+      <p class="subject-year-links">他の年度を選ぶ：
+        <a href="subjects/s0.html">権利関係</a> ・
+        <a href="subjects/s1.html">宅建業法</a> ・
+        <a href="subjects/s2.html">法令上の制限</a> ・
+        <a href="subjects/s3.html">税・その他</a>
+      </p>
+    </div>
+
+    <div class="card" id="setup-range-card">
+      <h2>出題範囲を選ぶ</h2>
+
+      <div class="field">
+        <label for="exam-select">回・年度</label>
+        <select id="exam-select"></select>
+      </div>
+
+      <div class="field">
+        <label for="subject-select">分野</label>
+        <select id="subject-select">
+          <option value="__all__">すべての分野</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>出題順</label>
+        <div class="radio-row">
+          <label><input type="radio" name="order" value="sequential" checked> 番号順</label>
+          <label><input type="radio" name="order" value="random"> ランダム</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>出題形式</label>
+        <div class="radio-row">
+          <label><input type="radio" name="mode" value="single" checked> 肢別（1問1答）</label>
+          <label><input type="radio" name="mode" value="group"> 4択実戦（A〜Dをまとめて解答）</label>
+        </div>
+      </div>
+
+      <button id="start-btn" class="btn-primary">演習を始める</button>
+    </div>
+
+    <div class="card note-card">
+      <p>
+        本サイトの問題文・選択肢は、宅地建物取引士資格試験（実施：一般財団法人不動産適正取引推進機構）の
+        過去問題を、文言を改変せずに使用しています（実施機関への著作権確認は現在対応中で、確認が
+        取れるまでは暫定的な取り扱いとしています）。
+      </p>
+      <p>
+        正答は同機構公表の試験問題・正解番号表に基づきます。解説は<b>AI（生成AI）が条文・判例等をもとに作成した下書きで、
+        宅地建物取引士など専門家によるレビューを経ていません。</b>内容の正確性を保証するものではなく、
+        法的助言でもありません。実施団体とは関係のない個人制作のサイトです。
+        法改正等により、現在では成立しない設問が含まれる場合があります。
+        誤りに気づいた場合は各問題ページの「誤りを報告する」からご連絡ください。
+      </p>
+      <p><b>本サイトは受験対策のための学習教材であり、個別の不動産取引・法律相談を行うものではありません。</b>
+        実際の不動産取引・法律問題については、宅地建物取引士・弁護士等の専門家にご相談ください。</p>
+    </div>
+  </section>
+
+  <!-- ===== 出題画面 ===== -->
+  <section id="view-quiz" class="view hidden">
+    <div class="quiz-status">
+      <span id="quiz-progress"></span>
+      <span id="quiz-score"></span>
+    </div>
+    <div class="quiz-progress-bar"><div id="quiz-progress-bar-fill" class="quiz-progress-bar-fill"></div></div>
+
+    <div id="quiz-single" class="card">
+      <div class="q-meta">
+        <span id="q-subject" class="badge"></span>
+        <span id="q-number"></span>
+      </div>
+      <p id="q-text" class="q-text"></p>
+      <div id="q-choices" class="choices"></div>
+      <p id="q-feedback" class="feedback hidden"></p>
+      <div id="q-law-status" class="law-status hidden"></div>
+      <div id="q-explanation" class="explanation hidden">
+        <h3>解説</h3>
+        <div class="explanation-head">
+          <span id="q-explanation-verdict" class="explanation-verdict hidden"></span>
+          <span id="q-explanation-confidence" class="confidence-badge hidden">確度中</span>
+        </div>
+        <p id="q-explanation-text"></p>
+        <ul id="q-explanation-articles" class="articles"></ul>
+      </div>
+      <div id="q-review-status" class="review-status hidden"></div>
+      <div class="q-actions">
+        <button id="next-btn" class="btn-primary hidden">次の問題へ</button>
+      </div>
+    </div>
+
+    <div id="quiz-group" class="card hidden">
+      <div class="q-meta">
+        <span id="g-subject" class="badge"></span>
+        <span id="g-number"></span>
+      </div>
+      <div id="g-statements" class="statements"></div>
+      <div class="group-question">
+        <p id="g-prompt" class="group-prompt"></p>
+        <div id="g-options" class="group-options"></div>
+      </div>
+      <p id="g-feedback" class="feedback hidden"></p>
+      <div id="g-explanation" class="explanation hidden">
+        <h3>解答・解説</h3>
+        <div id="g-explanation-list" class="group-explanation-list"></div>
+      </div>
+      <div class="q-actions">
+        <button id="next-group-btn" class="btn-primary hidden">次の問題へ</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 結果画面 ===== -->
+  <section id="view-result" class="view hidden">
+    <div class="card">
+      <h2>結果</h2>
+      <p id="result-score" class="result-score"></p>
+      <div id="result-list" class="result-list"></div>
+      <div class="q-actions">
+        <button id="retry-wrong-btn" class="btn-primary">間違えた問題だけ再挑戦</button>
+        <button id="back-setup-btn" class="btn-secondary">出題設定に戻る</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>出典: 宅地建物取引士資格試験（<a href="https://www.retio.or.jp/exam/" target="_blank" rel="noopener">一般財団法人不動産適正取引推進機構</a>）／ 非公式の個人学習用サイトです。解説は独自作成。</p>
+  <p class="footer-links"><a href="terms.html">利用規約</a> ・ <a href="privacy.html">プライバシーポリシー</a> ・ <a href="updates.html">更新履歴</a></p>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
