@@ -377,17 +377,27 @@
     const buttons = el("q-choices").querySelectorAll(".choice-btn");
     buttons.forEach((b) => (b.disabled = true));
 
-    const isCorrect = chosenNum === q.answer;
+    // 没問（出題ミスにより正解肢がなく、実施団体が受験者全員を正解として扱った設問。
+    // 平成2年問17・平成3年問9・平成24年問48・令和4年問48等、数年おきに実例がある）は、
+    // どの選択肢を選んでも実施団体の扱いに合わせて正解とする。
+    const isCorrect = q.no_correct_answer ? true : chosenNum === q.answer;
     buttons.forEach((b) => {
       const n = Number(b.dataset.num);
-      if (n === q.answer) b.classList.add("correct");
-      else if (n === chosenNum) b.classList.add("wrong");
+      if (q.no_correct_answer) {
+        if (n === chosenNum) b.classList.add("correct");
+      } else if (n === q.answer) {
+        b.classList.add("correct");
+      } else if (n === chosenNum) {
+        b.classList.add("wrong");
+      }
     });
 
     const feedback = el("q-feedback");
     feedback.classList.remove("hidden", "is-correct", "is-wrong");
     feedback.classList.add(isCorrect ? "is-correct" : "is-wrong");
-    feedback.textContent = isCorrect
+    feedback.textContent = q.no_correct_answer
+      ? "この問題は出題ミス等により正解肢がなく、実施団体により受験者全員が正解として扱われました（解説を参照）。"
+      : isCorrect
       ? "正解です。"
       : `不正解です。正解は ${q.answer} です。`;
 

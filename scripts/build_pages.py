@@ -92,10 +92,24 @@ def slug_of(item_id, exam_id):
 
 
 def render_choice(c, answer_num):
-    is_correct = c["num"] == answer_num
+    is_correct = answer_num is not None and c["num"] == answer_num
     cls = "choice correct" if is_correct else "choice"
     mark = " ✓" if is_correct else ""
     return f'<li class="{cls}">{esc(c["text"])}{mark}</li>'
+
+
+def render_no_correct_answer_notice(item):
+    """没問（出題ミスにより正解肢がなく、実施団体が受験者全員を正解として扱った設問）の注記。
+    平成2年問17・平成3年問9・平成24年問48・令和4年問48等、宅建試験では数年おきに実例がある
+    （CLAUDE.md参照）。本アプリでも実施団体の扱いに合わせ、どの選択肢を選んでも正解として採点する
+    （js/app.js の no_correct_answer 分岐）。静的ページ側は特定の選択肢に✓を付けず、この注記のみで示す。"""
+    if not item.get("no_correct_answer"):
+        return ""
+    note = item.get("no_correct_answer_note", "")
+    return f'''
+    <div class="law-status law-status--repealed">
+      <strong>⚠ この問題は出題ミス等により正解肢がなく、実施団体により受験者全員が正解として扱われました</strong>{("　" + esc(note)) if note else ""}
+    </div>'''
 
 
 def render_law_status(item):
@@ -261,8 +275,9 @@ PAGE_TMPL = """<!doctype html>
 
 
 def build_question_page(item, exam_label, noindex=False):
+    answer_num = None if item.get("no_correct_answer") else item["answer"]
     choices_html = "\n      ".join(
-        render_choice(c, item["answer"]) for c in item["choices"]
+        render_choice(c, answer_num) for c in item["choices"]
     )
     plain_text = re.sub(r"\s+", " ", item["text"]).strip()
     description = (plain_text[:110] + "…") if len(plain_text) > 110 else plain_text
@@ -311,7 +326,7 @@ def build_question_page(item, exam_label, noindex=False):
         subject=esc(item["subject"]),
         text=esc(item["text"]),
         choices_html=choices_html,
-        law_status_html=render_law_status(item),
+        law_status_html=render_no_correct_answer_notice(item) + render_law_status(item),
         explanation_html=render_explanation(item),
         review_status_html=render_review_status(item),
         source=esc(item.get("source", "")),
