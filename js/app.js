@@ -91,11 +91,13 @@
     const params = new URLSearchParams(location.search);
     const requestedExam = params.get("exam");
     const requestedMode = params.get("mode") === "group" ? "group" : "single";
+    const requestedScope = params.get("scope") === "all" ? "all" : "current";
     const autostart = params.get("autostart") === "1";
     const validExam = requestedExam && exams.some((e) => e.file === requestedExam);
     if (validExam) {
       examSelect.value = requestedExam;
     }
+    document.querySelector(`input[name="scope"][value="${requestedScope}"]`).checked = true;
 
     await loadExamQuestions(examSelect.value);
 
@@ -259,12 +261,17 @@
     const order = document.querySelector('input[name="order"]:checked').value;
     const mode = document.querySelector('input[name="mode"]:checked').value;
 
+    const currentOnly = document.querySelector('input[name="scope"]:checked').value === "current";
+    const isCurrentLaw = (q) => !q.law_status || q.law_status === "valid";
+
     let list = subject === "__all__"
       ? currentExamQuestions.slice()
       : currentExamQuestions.filter((q) => q.subject === subject);
 
     if (mode === "group") {
       let groupList = buildGroups(list);
+      // 4択実戦は4肢の正誤の組合せで形式を判定するため、1肢でも改正済みなら問全体を除外する
+      if (currentOnly) groupList = groupList.filter((g) => g.items.every(isCurrentLaw));
       if (order === "random") {
         groupList = shuffle(groupList);
       } else {
@@ -272,6 +279,8 @@
       }
       return { mode, list: groupList };
     }
+
+    if (currentOnly) list = list.filter(isCurrentLaw);
 
     if (order === "random") {
       list = shuffle(list);
@@ -296,7 +305,10 @@
 
   startBtn.addEventListener("click", () => {
     const { mode, list } = buildQueue();
-    if (list.length === 0) return;
+    if (list.length === 0) {
+      alert("この条件に当てはまる問題がありません。範囲や出題する肢の設定を変えてください。");
+      return;
+    }
     startQuiz(mode, list);
   });
 
