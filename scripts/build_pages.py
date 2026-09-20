@@ -190,6 +190,9 @@ PAGE_TMPL = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>{title}</title>
 <meta name="description" content="{description}">
 <link rel="canonical" href="{canonical}">
@@ -336,6 +339,9 @@ INDEX_TMPL = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>{short_label}の過去問一覧・解説｜宅建過去問ラボ</title>
 <meta name="description" content="{exam_label}の過去問一覧。問題ごとに解説・法改正ステータス付きで確認できます。">
 <link rel="stylesheet" href="../../css/style.css">
@@ -374,6 +380,9 @@ SUBJECT_TMPL = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>{subject_name}の過去問一覧・解説｜宅建過去問ラボ</title>
 <meta name="description" content="宅建試験「{subject_name}」の過去問を年度別に一覧。{year_count}年度分・{total_items}肢を収録。年度ごとに問題を見る、または演習を始めることができます。">
 <link rel="canonical" href="{canonical}">
