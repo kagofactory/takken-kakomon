@@ -81,9 +81,24 @@
     view[name].classList.remove("hidden");
   }
 
+  // 新しい年度を先頭に、同一年度内は 権利関係→宅建業法→法令上の制限→税・その他 の順に並べる
+  function sortExamsNewestFirst(exams) {
+    const key = (e) => {
+      const m = e.id.match(/^(?:h(\d+)|r(\d{4}))-s(\d)$/);
+      if (!m) return [0, 9];
+      const year = m[1] ? 1988 + Number(m[1]) : Number(m[2]);
+      return [year, Number(m[3])];
+    };
+    return exams.slice().sort((a, b) => {
+      const [ya, sa] = key(a);
+      const [yb, sb] = key(b);
+      return yb - ya || sa - sb;
+    });
+  }
+
   async function loadExamList() {
     const res = await fetch("data/exams.json");
-    const exams = await res.json();
+    const exams = sortExamsNewestFirst((await res.json()).filter((e) => e.id !== "sample")); // デモ問題は一覧に出さない
     examSelect.innerHTML = exams
       .map((e) => `<option value="${e.file}">${e.label}</option>`)
       .join("");
