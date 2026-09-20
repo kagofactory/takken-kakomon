@@ -96,11 +96,36 @@
     });
   }
 
+  // 「令和7年度」のように年度ごとにまとめる（新しい年度が先頭。年度内は分野順）。
+  // 出題範囲は「年度」を選び、「分野」で権利関係・宅建業法などを絞り込む。
+  let yearGroups = [];            // [{key: "r2025", label: "令和7年度", exams: [...]}]
+  let questionsByFile = new Map(); // データファイル → 問題配列
+
+  function yearKeyOf(s) {
+    const m = String(s).match(/(h\d+|r\d{4})(?:-s\d)?(?:\.json)?$/);
+    return m ? m[1] : null;
+  }
+
+  function groupExamsByYear(sortedExams) {
+    const map = new Map();
+    for (const e of sortedExams) {
+      const key = yearKeyOf(e.id);
+      if (!key) continue;
+      if (!map.has(key)) {
+        const m = e.label.match(/^((?:令和|平成)(?:元|\d+)年度)/);
+        map.set(key, { key, label: m ? m[1] : key, exams: [] });
+      }
+      map.get(key).exams.push(e);
+    }
+    return Array.from(map.values());
+  }
+
   async function loadExamList() {
     const res = await fetch("data/exams.json");
     const exams = sortExamsNewestFirst(await res.json());
-    examSelect.innerHTML = exams
-      .map((e) => `<option value="${e.file}">${e.label}</option>`)
+    yearGroups = groupExamsByYear(exams);
+    examSelect.innerHTML = yearGroups
+      .map((g) => `<option value="${g.key}">${g.label}</option>`)
       .join("");
 
     const params = new URLSearchParams(location.search);
@@ -110,11 +135,17 @@
     const autostart = params.get("autostart") === "1";
     const validExam = requestedExam && exams.some((e) => e.file === requestedExam);
     if (validExam) {
-      examSelect.value = requestedExam;
+      examSelect.value = yearKeyOf(requestedExam);
     }
     document.querySelector(`input[name="scope"][value="${requestedScope}"]`).checked = true;
 
     await loadExamQuestions(examSelect.value);
+
+    // 分野別ページなどから file 指定で来た場合は、その分野を選んだ状態にする
+    if (validExam) {
+      const first = (questionsByFile.get(requestedExam) || [])[0];
+      if (first) subjectSelect.value = first.subject;
+    }
 
     if (validExam && autostart) {
       document.querySelector(`input[name="mode"][value="${requestedMode}"]`).checked = true;
@@ -131,8 +162,8 @@
 
     const saved = loadSavedProgress();
     if (saved && saved.qIndex < saved.queueIds.length) {
-      const savedExam = exams.find((e) => e.file === saved.examFile);
-      if (savedExam) renderResumeCard(saved, savedExam);
+      const savedYear = yearGroups.find((g) => g.key === yearKeyOf(saved.examFile));
+      if (savedYear) renderResumeCard(saved, savedYear);
     }
   }
 
@@ -146,8 +177,8 @@
   }
 
   async function resumeQuiz(saved) {
-    examSelect.value = saved.examFile;
-    await loadExamQuestions(saved.examFile);
+    examSelect.value = yearKeyOf(saved.examFile);
+    await loadExamQuestions(examSelect.value);
     const groups = buildGroups(currentExamQuestions);
     const byId = new Map(currentExamQuestions.map((q) => [q.id, q]));
 
@@ -181,9 +212,16 @@
     renderQuestion();
   }
 
-  async function loadExamQuestions(file) {
-    const res = await fetch(file);
-    currentExamQuestions = await res.json();
+  async function loadExamQuestions(yearKey) {
+    const group = yearGroups.find((g) => g.key === yearKey);
+    const loaded = await Promise.all(
+      group.exams.map(async (e) => {
+        const res = await fetch(e.file);
+        return [e.file, await res.json()];
+      })
+    );
+    questionsByFile = new Map(loaded);
+    currentExamQuestions = loaded.flatMap(([, items]) => items);
     populateSubjects(currentExamQuestions);
   }
 
@@ -192,11 +230,11 @@
     for (const q of questions) {
       if (!seen.includes(q.subject)) seen.push(q.subject);
     }
-    const options = ['<option value="__all__">すべての科目（' + questions.length + '問）</option>']
+    const options = ['<option value="__all__">すべての分野（' + questions.length + '肢）</option>']
       .concat(
         seen.map((s) => {
           const count = questions.filter((q) => q.subject === s).length;
-          return `<option value="${s}">${s}（${count}問）</option>`;
+          return `<option value="${s}">${s}（${count}肢）</option>`;
         })
       );
     subjectSelect.innerHTML = options.join("");
@@ -209,12 +247,13 @@
       const res = await fetch("data/exams.json");
       const exams = await res.json();
       let total = 0;
+      const years = new Set(exams.map((e) => yearKeyOf(e.id)));
       for (const e of exams) {
         const r = await fetch(e.file);
         const items = await r.json();
         total += items.length;
       }
-      el("progress-count").textContent = `収録問題数: ${total}問`;
+      el("progress-count").textContent = `収録: ${years.size}年度分・${total.toLocaleString()}肢`;
     } catch (e) {
       el("progress-count").textContent = "";
     }
