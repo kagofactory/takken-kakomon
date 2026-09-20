@@ -485,7 +485,7 @@ def main():
         print(f"{exam_id}: {len(items)}ページ生成{'（noindex）' if is_sample else ''}")
 
         if not is_sample:
-            m_round = re.match(r"^(第\d+回（[^）]+）)", exam["label"])
+            m_round = re.match(r"^((?:令和|平成)(?:元|\d+)年度)", exam["label"]) or re.match(r"^(第\d+回（[^）]+）)", exam["label"])
             year_label = m_round.group(1) if m_round else exam_id
             m_s = re.search(r"-(s\d)$", exam_id)
             if m_s:
