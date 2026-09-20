@@ -418,10 +418,5 @@
     "id": "r2024-s3",
     "label": "令和6年度 税・その他（完全収録・問23〜25、46〜50）",
     "file": "data/r2024-s3.json"
-  },
-  {
-    "id": "sample",
-    "label": "デモ用サンプル問題",
-    "file": "data/sample.json"
   }
 ]
