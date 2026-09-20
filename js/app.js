@@ -98,7 +98,7 @@
 
   async function loadExamList() {
     const res = await fetch("data/exams.json");
-    const exams = sortExamsNewestFirst((await res.json()).filter((e) => e.id !== "sample")); // デモ問題は一覧に出さない
+    const exams = sortExamsNewestFirst(await res.json());
     examSelect.innerHTML = exams
       .map((e) => `<option value="${e.file}">${e.label}</option>`)
       .join("");
@@ -210,7 +210,6 @@
       const exams = await res.json();
       let total = 0;
       for (const e of exams) {
-        if (e.id === "sample") continue; // デモ問題はカウントしない
         const r = await fetch(e.file);
         const items = await r.json();
         total += items.length;

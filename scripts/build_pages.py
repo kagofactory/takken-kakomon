@@ -12,8 +12,6 @@ HTMLファイルとして書き出す（問題文・選択肢・正解・解説�
 サーバーサイドで完結した形で埋め込み、JavaScriptなしで内容が読める）。
 あわせて演習アプリ（index.html）への導線も張る。
 
-sample.json（デモ用）はnoindexにして、実データのみを検索対象にする。
-
 `C:\\Users\\allin\\sharoushi-kakomon`（社労士過去問ラボ）をベースに複製・改修。
 
 使い方:
@@ -460,7 +458,6 @@ def main():
 
     for exam in exams:
         exam_id = exam["id"]
-        is_sample = exam_id == "sample"
         data_path = os.path.join(SITE_ROOT, exam["file"])
         with open(data_path, encoding="utf-8") as f:
             items = json.load(f)
@@ -469,32 +466,29 @@ def main():
         os.makedirs(exam_out_dir, exist_ok=True)
 
         for item in items:
-            html = build_question_page(item, exam["label"], noindex=is_sample)
+            html = build_question_page(item, exam["label"])
             out_path = os.path.join(exam_out_dir, f"{slug_of(item['id'], exam_id)}.html")
             with open(out_path, "w", encoding="utf-8") as f:
                 f.write(html)
-            if not is_sample:
-                sitemap_urls.append(f"{SITE_URL}/q/{exam_id}/{slug_of(item['id'], exam_id)}.html")
+            sitemap_urls.append(f"{SITE_URL}/q/{exam_id}/{slug_of(item['id'], exam_id)}.html")
 
         index_html = build_exam_index(exam_id, exam["label"], items)
         with open(os.path.join(exam_out_dir, "index.html"), "w", encoding="utf-8") as f:
             f.write(index_html)
-        if not is_sample:
-            sitemap_urls.append(f"{SITE_URL}/q/{exam_id}/index.html")
+        sitemap_urls.append(f"{SITE_URL}/q/{exam_id}/index.html")
 
-        print(f"{exam_id}: {len(items)}ページ生成{'（noindex）' if is_sample else ''}")
+        print(f"{exam_id}: {len(items)}ページ生成")
 
-        if not is_sample:
-            m_round = re.match(r"^((?:令和|平成)(?:元|\d+)年度)", exam["label"]) or re.match(r"^(第\d+回（[^）]+）)", exam["label"])
-            year_label = m_round.group(1) if m_round else exam_id
-            m_s = re.search(r"-(s\d)$", exam_id)
-            if m_s:
-                subject_rows[m_s.group(1)].append({
-                    "exam_id": exam_id,
-                    "year_label": year_label,
-                    "item_count": len(items),
-                    "file": exam["file"],
-                })
+        m_round = re.match(r"^((?:令和|平成)(?:元|\d+)年度)", exam["label"]) or re.match(r"^(第\d+回（[^）]+）)", exam["label"])
+        year_label = m_round.group(1) if m_round else exam_id
+        m_s = re.search(r"-(s\d)$", exam_id)
+        if m_s:
+            subject_rows[m_s.group(1)].append({
+                "exam_id": exam_id,
+                "year_label": year_label,
+                "item_count": len(items),
+                "file": exam["file"],
+            })
 
     # 分野別カテゴリページ（subjects/sN.html）
     os.makedirs(SUBJECTS_OUT_DIR, exist_ok=True)

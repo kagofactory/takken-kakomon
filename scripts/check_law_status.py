@@ -29,7 +29,7 @@ def main():
     per_year = {}
     for f in files:
         base = os.path.basename(f)
-        if base in ("exams.json", "sample.json"):
+        if base == "exams.json":
             continue
         if prefixes and not any(base.startswith(p) for p in prefixes):
             continue
