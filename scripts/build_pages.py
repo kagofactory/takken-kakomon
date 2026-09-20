@@ -31,7 +31,7 @@ SITE_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(SITE_ROOT, "data")
 OUT_DIR = os.path.join(SITE_ROOT, "q")
 SUBJECTS_OUT_DIR = os.path.join(SITE_ROOT, "subjects")
-SITE_URL = "https://takken-kakomon.com"
+SITE_URL = "https://takken-kakomon.jp"
 SITE_NAME = "宅建過去問ラボ"
 
 # 科目インデックス（rYYYY-sN の N）は宅建試験の4分野に対応

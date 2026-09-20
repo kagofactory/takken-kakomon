@@ -54,7 +54,7 @@
   `PROGRESS_KEY`を`takken_progress_v1`に変更（localStorageキーの衝突回避）。
   「5択実戦」→「4択実戦（A〜Dをまとめて解答）」に表記変更。それ以外のロジック
   （肢別/グループモード切替、続きから始める機能、進捗バー等）は無変更で流用。
-- `scripts/build_pages.py` — `SITE_URL`を`https://takken-kakomon.com`に、`SUBJECT_META`を
+- `scripts/build_pages.py` — `SITE_URL`を`https://takken-kakomon.jp`に（2026年9月21日に.comから変更）、`SUBJECT_META`を
   上記4分野に変更。サイト名は「宅建過去問ラボ」。社労士版にあった`topics.html`/`topics2.html`
   （法改正・白書対策ページ）は宅建では未設置のため、sitemap生成対象・ヘッダーナビからも除外した。
   必要になれば別途追加する。
@@ -491,9 +491,7 @@ RETIO公式サイトのPDFファイル名規則（`https://www.retio.or.jp/wp-co
 2. **フェーズ3：残り年度への拡張（令和4年度〜昭和63年度、約35年分）**：フェーズ1と同じ方式で
    1年度ずつ順次拡張（社労士版と同じ進め方）。古い年度は制度が現行法と大きく異なる場合がある点に
    注意（`law_status`フィールドで対応）。
-3. **ドメイン取得・公開**：`takken-kakomon.com`は2026年9月13日時点でDNS未設定（未使用の可能性が
-   高いが、正式な空き状況は未確認）。ユーザーがお名前.com等で取得後、GitHub Pages・CNAME・
-   DNS設定を社労士版と同じ手順で行う。
+3. **ドメイン取得・公開**：`takken-kakomon.com`は第三者が取得済みだったため、**公開ドメインは`takken-kakomon.jp`に決定（2026年9月21日、ユーザー判断）**。サイト内のURL（canonical・sitemap・robots・og）は`.jp`に書き換え済みで、リポジトリルートに`CNAME`（`takken-kakomon.jp`）を追加した。残りの手順（すべてユーザー作業）：①お名前.comで`takken-kakomon.jp`を取得、②GitHubリポジトリ`kagofactory/takken-kakomon`をPublicに変更（現在はPrivate。無料プランのPagesは公開リポジトリのみ）、③Settings→Pagesでブランチ`master`・`/ (root)`を指定、④DNS設定（Aレコード4件＝185.199.108.153/109.153/110.153/111.153、wwwのCNAME→`kagofactory.github.io`。社労士版と同じ手順）、⑤HTTPS強制、⑥Search Console登録。公開前に、RETIOへの著作権の個別確認記録がない点（本ファイル「terms.html」の項）をユーザーに再確認すること。SNS共有用の`images/og-image.png`とファビコンは未作成。
 4. **画像**：`images/og-image.png`は社労士版のものをまだコピーしていない（自サイト用に別途用意
    する必要がある）。
 5. **GitHubリポジトリ**：まだ作成していない。リポジトリ名・公開/非公開をユーザーに確認のうえ作成する。
