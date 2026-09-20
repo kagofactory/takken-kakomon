@@ -581,11 +581,12 @@
     "related_articles": [
       "宅地造成等規制法第2条第2号（宅地造成の定義）"
     ],
-    "law_status": "valid",
+    "law_status": "amended",
     "source": "宅地建物取引主任者資格試験（実施：一般財団法人不動産適正取引推進機構、平成22年度試験・問20）",
     "review_status": "ai_unreviewed",
     "last_verified": "2026-09-19",
-    "law_reference_date": "平成22年4月1日"
+    "law_reference_date": "平成22年4月1日",
+    "law_status_note": "宅地造成等規制法は、令和5年5月26日施行の改正により「宅地造成及び特定盛土等規制法（盛土規制法）」に改称・改組され、条文番号も改められた。出題当時（平成17年）の法律名・規定を前提とした肢である。"
   },
   {
     "id": "h22-s2-20b",
@@ -609,11 +610,12 @@
     "related_articles": [
       "宅地造成等規制法第9条（宅地造成に関する工事の技術的基準）"
     ],
-    "law_status": "valid",
+    "law_status": "amended",
     "source": "宅地建物取引主任者資格試験（実施：一般財団法人不動産適正取引推進機構、平成22年度試験・問20）",
     "review_status": "ai_unreviewed",
     "last_verified": "2026-09-19",
-    "law_reference_date": "平成22年4月1日"
+    "law_reference_date": "平成22年4月1日",
+    "law_status_note": "宅地造成等規制法は、令和5年5月26日施行の改正により「宅地造成及び特定盛土等規制法（盛土規制法）」に改称・改組され、条文番号も改められた。出題当時（平成17年）の法律名・規定を前提とした肢である。"
   },
   {
     "id": "h22-s2-20c",
@@ -637,11 +639,12 @@
     "related_articles": [
       "宅地造成等規制法第15条第2項（届出）"
     ],
-    "law_status": "valid",
+    "law_status": "amended",
     "source": "宅地建物取引主任者資格試験（実施：一般財団法人不動産適正取引推進機構、平成22年度試験・問20）",
     "review_status": "ai_unreviewed",
     "last_verified": "2026-09-19",
-    "law_reference_date": "平成22年4月1日"
+    "law_reference_date": "平成22年4月1日",
+    "law_status_note": "宅地造成等規制法は、令和5年5月26日施行の改正により「宅地造成及び特定盛土等規制法（盛土規制法）」に改称・改組され、条文番号も改められた。出題当時（平成17年）の法律名・規定を前提とした肢である。"
   },
   {
     "id": "h22-s2-20d",
@@ -665,11 +668,12 @@
     "related_articles": [
       "宅地造成等規制法第16条第1項（維持義務等）"
     ],
-    "law_status": "valid",
+    "law_status": "amended",
     "source": "宅地建物取引主任者資格試験（実施：一般財団法人不動産適正取引推進機構、平成22年度試験・問20）",
     "review_status": "ai_unreviewed",
     "last_verified": "2026-09-19",
-    "law_reference_date": "平成22年4月1日"
+    "law_reference_date": "平成22年4月1日",
+    "law_status_note": "宅地造成等規制法は、令和5年5月26日施行の改正により「宅地造成及び特定盛土等規制法（盛土規制法）」に改称・改組され、条文番号も改められた。出題当時（平成17年）の法律名・規定を前提とした肢である。"
   },
   {
     "id": "h22-s2-21a",
@@ -889,10 +893,11 @@
     "related_articles": [
       "農地法第19条（賃貸借の存続期間）"
     ],
-    "law_status": "valid",
+    "law_status": "amended",
     "source": "宅地建物取引主任者資格試験（実施：一般財団法人不動産適正取引推進機構、平成22年度試験・問22）",
     "review_status": "ai_unreviewed",
     "last_verified": "2026-09-19",
-    "law_reference_date": "平成22年4月1日"
+    "law_reference_date": "平成22年4月1日",
+    "law_status_note": "民法上の賃貸借の存続期間の上限は、令和2年4月1日施行の改正民法により20年から50年に伸長された（現行第604条）。現行法では、駐車場用地の賃貸借を35年と定めればそのとおり有効となる。本肢の後半（期間を定めなかったものとみなされる）は、現行法でも誤りである。"
   }
 ]
