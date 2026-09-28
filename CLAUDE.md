@@ -502,6 +502,8 @@ RETIO公式サイトのPDFファイル名規則（`https://www.retio.or.jp/wp-co
 
 **【2026年9月22日 追記】Bing Webmaster Toolsにも登録し、`sitemap.xml`を送信済み（反映まで最大48時間）。宅建サイト用のXアカウントを作成し、プロフィール設定済み（初回投稿はユーザーが実施予定）。**
 
+**【2026年9月29日 Search Consoleの確認結果】** 「ページのインデックス登録」レポートで、「検出 - インデックス未登録」が2,118件、「クロール済み - インデックス未登録」が207件だった。sitemap.xml（3,770URL）はサイト側では200・XML正常・robots許可を確認済み。サイトマップ画面のステータス・検出ページ数、およびインデックス登録済みの件数は未確認。公開から約1週間の新規ドメインでは「検出 - 未登録」が多いのは一般的で、現時点では様子見とし、1〜2週間後に同じ数字を再確認して減少を比較する。「クロール済み - 未登録」207件はURLの傾向（肢別ページの内容の薄さ・類似性など）を確認する必要がある。
+
 **【以下は2026年9月21日時点の進捗（履歴）】①ドメイン取得済み、②リポジトリはPublic化済み、③GitHub Pages有効化・Custom domain（takken-kakomon.jp）設定済み。残りは④お名前.comのDNS設定（Aレコード4件＋www CNAME。未設定で、まだ初期値の150.95.255.38を指している）→ DNS反映確認（nslookup）→ ⑤Enforce HTTPS → ⑥Search Console登録・sitemap送信。** 元の手順：①お名前.comで`takken-kakomon.jp`を取得、②GitHubリポジトリ`kagofactory/takken-kakomon`をPublicに変更（現在はPrivate。無料プランのPagesは公開リポジトリのみ）、③Settings→Pagesでブランチ`master`・`/ (root)`を指定、④DNS設定（Aレコード4件＝185.199.108.153/109.153/110.153/111.153、wwwのCNAME→`kagofactory.github.io`。社労士版と同じ手順）、⑤HTTPS強制、⑥Search Console登録。公開前に、RETIOへの著作権の個別確認記録がない点（本ファイル「terms.html」の項）をユーザーに再確認すること。SNS共有用の`images/og-image.png`、`favicon.ico`/`favicon.png`/`apple-touch-icon.png`は2026年9月21日に作成済み（全ページの`<head>`にリンク済み）。`takken-kakomon.jp`はユーザーが2026年9月21日にお名前.comで取得済み。
 4. **画像**：`images/og-image.png`は社労士版のものをまだコピーしていない（自サイト用に別途用意
    する必要がある）。
