@@ -533,3 +533,7 @@ cd scripts && python build_pages.py
 ## law_status の機械チェック（2026年9月20日追加）
 
 `python scripts/check_law_status.py [h20 h19 ...]` は、`law_status`が`valid`の肢のうち、各法改正（債権法・相続法/遺留分・成年年齢/婚姻・盛土規制法・電子契約）の施行日より前の年度に属し、改正関連語を含むものを「要確認候補」として列挙する（引数なしなら年度別件数、年度指定なら肢ID一覧）。**新しい年度を収録したら、コミット前に必ず当該年度に対して実行し、候補をすべて読んで`amended`の要否を判断すること。** 候補は確定ではない（結論も前提も現行法で変わらない肢は`valid`のままでよい）。2026年9月20日時点の既収録年度の候補は計256件だったが、2026年9月21日に全件点検済み（判断済みの候補が残るため、`check_law_status.py`は今でも149件を表示する。これらは`valid`と判断した肢であり、新たに要点検となったものではない）。
+
+## お問い合わせフォーム（2026年10月2日追加）
+
+`contact.html`を新設（`noindex`・sitemap非掲載）。社労士過去問ラボの`contact.html`を宅建向けに文言調整して複製したもので、送信は外部サービスWeb3Forms経由（社労士版と同じaccess_keyを使用。運営者メール`kagofactory@gmail.com`へ転送されるため、件名「【宅建過去問ラボ】お問い合わせ」で区別する。分けたくなったらWeb3Formsで宅建用キーを発行して`contact.html`のaccess_keyを差し替える）。フッターの「お問い合わせ」リンクは手動ページ4件と`scripts/build_pages.py`の3か所に設置済み。`privacy.html`にWeb3Forms利用の記載を追加、`terms.html`・`updates.html`も更新。

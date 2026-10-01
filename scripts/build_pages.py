@@ -267,7 +267,7 @@ PAGE_TMPL = """<!doctype html>
 
 <footer class="site-footer">
   <p>出典: 宅地建物取引士資格試験（<a href="https://www.retio.or.jp/exam/" target="_blank" rel="noopener">一般財団法人不動産適正取引推進機構</a>）／ 非公式の個人学習用サイトです。解説は独自作成・専門家未レビュー。</p>
-  <p class="footer-links"><a href="{root_path}terms.html">利用規約</a> ・ <a href="{root_path}privacy.html">プライバシーポリシー</a> ・ <a href="{root_path}updates.html">更新履歴</a></p>
+  <p class="footer-links"><a href="{root_path}terms.html">利用規約</a> ・ <a href="{root_path}privacy.html">プライバシーポリシー</a> ・ <a href="{root_path}updates.html">更新履歴</a> ・ <a href="{root_path}contact.html">お問い合わせ</a></p>
 </footer>
 
 </body>
@@ -369,7 +369,7 @@ INDEX_TMPL = """<!doctype html>
 </main>
 <footer class="site-footer">
   <p>非公式の個人学習用サイトです。</p>
-  <p class="footer-links"><a href="../../terms.html">利用規約</a> ・ <a href="../../privacy.html">プライバシーポリシー</a> ・ <a href="../../updates.html">更新履歴</a></p>
+  <p class="footer-links"><a href="../../terms.html">利用規約</a> ・ <a href="../../privacy.html">プライバシーポリシー</a> ・ <a href="../../updates.html">更新履歴</a> ・ <a href="../../contact.html">お問い合わせ</a></p>
 </footer>
 </body>
 </html>
@@ -429,7 +429,7 @@ SUBJECT_TMPL = """<!doctype html>
 </main>
 <footer class="site-footer">
   <p>非公式の個人学習用サイトです。</p>
-  <p class="footer-links"><a href="../terms.html">利用規約</a> ・ <a href="../privacy.html">プライバシーポリシー</a> ・ <a href="../updates.html">更新履歴</a></p>
+  <p class="footer-links"><a href="../terms.html">利用規約</a> ・ <a href="../privacy.html">プライバシーポリシー</a> ・ <a href="../updates.html">更新履歴</a> ・ <a href="../contact.html">お問い合わせ</a></p>
 </footer>
 </body>
 </html>
